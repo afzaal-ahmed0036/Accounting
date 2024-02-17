@@ -14,4 +14,7 @@ class ProductionLog extends Model
     public function productionLogDetails(){
         return $this->hasMany(ProductionLogDetail::class, 'ProductionLogID');
     }
+    public function product(){
+        return $this->belongsTo(Item::class, 'ProductID');
+    }
 }

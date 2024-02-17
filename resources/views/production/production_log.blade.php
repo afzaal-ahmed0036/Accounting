@@ -41,7 +41,7 @@
                                         <tr>
                                             <th>Batch #</th>
                                             <th>Date</th>
-                                            <th>Total Quantity</th>
+                                            {{-- <th>Total Quantity</th> --}}
                                             <th>Total Value</th>
                                             <th>Action</th>
                                         </tr>
@@ -74,16 +74,13 @@
                 "serverSide": true,
                 "ajax": "{{ url('Production/Logs') }}",
                 "columns": [{
-                        "data": "BatchNo"
+                        "data": "InvoiceNo"
                     },
                     {
                         "data": "Date"
                     },
                     {
-                        "data": "TotalQty"
-                    },
-                    {
-                        "data": "Value"
+                        "data": "GrandTotal"
                     },
                     {
                         "data": "action"

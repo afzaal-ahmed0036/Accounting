@@ -11,7 +11,7 @@ class ProductionLogDetail extends Model
     protected $primaryKey = 'ProductionLogDetailID';
     protected $guarded = [];
 
-    public function product(){
-        return $this->belongsTo(Product::class, 'ProductID');
+    public function material(){
+        return $this->belongsTo(Item::class, 'MaterialID');
     }
 }

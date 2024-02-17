@@ -43,24 +43,24 @@
                 <div class="card">
                     <form action="{{ url('ProductUpdate') }}" method="post">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $product->ProductID }}">
+                        <input type="hidden" name="id" value="{{ $product->ItemID }}">
                         <div class="card-body">
                             <div class="row mb-3">
                                 <strong class="fst-italic text-info">Product Basic Information:</strong>
                                 <div class="col-4">
                                     <label class="col-form-label fw-bold" for="first-name">Name</label>
                                     <input type="text" id="first-name" class="form-control" name="name"
-                                        placeholder="Product Name" required value="{{ $product->name }}">
+                                        placeholder="Product Name" required value="{{ $product->ItemName }}">
                                 </div>
                                 <div class="col-4">
                                     <label class="col-form-label fw-bold" for="first-name">Price</label>
                                     <input type="number" step="0.001" id="first-name" class="form-control" name="price"
-                                        placeholder="Product Price" required value="{{ $product->price }}">
+                                        placeholder="Product Price" required value="{{ $product->SellingPrice }}">
                                 </div>
                                 <div class="col-4">
                                     <label class="col-form-label fw-bold" for="first-name">Details</label>
                                     <input type="text" id="first-name" class="form-control" name="details"
-                                        placeholder="Product Details" value="{{ $product->details }}">
+                                        placeholder="Product Details" value="{{ $product->description }}">
                                 </div>
                             </div>
                             <div class="row">

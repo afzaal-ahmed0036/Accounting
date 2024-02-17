@@ -50,7 +50,7 @@
                                         <strong>Name</strong>
                                     </div>
                                     <div class="card-body">
-                                        {{ $product->name }}
+                                        {{ $product->ItemName }}
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         <strong>Price</strong>
                                     </div>
                                     <div class="card-body">
-                                        {{ $product->price }}
+                                        {{ $product->SellingPrice }}
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                         <strong>Details</strong>
                                     </div>
                                     <div class="card-body">
-                                        {{ $product->details }}
+                                        {{ $product->description }}
                                     </div>
                                 </div>
                             </div>

@@ -68,16 +68,16 @@
                                         @foreach ($products as $key => $value)
                                             <tr>
                                                 <td class="col-md-">{{ $key + 1 }}</td>
-                                                <td class="col-md-7">{{ $value->name }}</td>
-                                                <td class="col-md-2">{{ $value->price }}</td>
-                                                <td class="col-md-2">{{ $value->details }}</td>
+                                                <td class="col-md-7">{{ $value->ItemName }}</td>
+                                                <td class="col-md-2">{{ $value->SellingPrice }}</td>
+                                                <td class="col-md-2">{{ $value->description }}</td>
                                                 <td class="col-md-2">
-                                                    <a href="{{ URL('Product/View/' . $value->ProductID) }}"><i
+                                                    <a href="{{ URL('Product/View/' . $value->ItemID) }}"><i
                                                             class=" text-dark fa fa-eye align-middle me-1"></i></a>
-                                                    <a href="{{ URL('Product/Edit/' . $value->ProductID) }}"><i
+                                                    <a href="{{ URL('Product/Edit/' . $value->ItemID) }}"><i
                                                             class=" text-dark bx bx-pencil align-middle me-1"></i></a>
                                                     <a href="#"
-                                                        onclick="delete_confirm2('Product/Delete',{{ $value->ProductID }})"><i
+                                                        onclick="delete_confirm2('Product/Delete',{{ $value->ItemID }})"><i
                                                             class="bx bx-trash text-dark  align-middle me-1"></i></a>
                                                 </td>
                                             </tr>

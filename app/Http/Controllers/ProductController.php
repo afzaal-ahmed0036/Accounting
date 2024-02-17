@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use App\Models\Product;
 use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -116,7 +115,7 @@ class ProductController extends Controller
     {
         try {
             $pagetitle = 'Products';
-            $products = Product::all();
+            $products = Item::where('ItemType', 'Product')->get();
             return view('production.productIndex', compact('products', 'pagetitle'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage())->with('class', 'danger');
@@ -171,12 +170,19 @@ class ProductController extends Controller
                 return back()->with('error', $firstErrorMessage)->with('class', 'danger')->withInput();
             }
             // dd($request->all());
+            $productData = [
+                'ItemType' => 'Product',
+                'ItemName' => $request->name,
+                'SellingPrice' => $request->price,
+                'description' => $request->details,
+
+            ];
             DB::beginTransaction();
-            $product = Product::create($request->except('_token', 'itemID', 'itemQty'));
+            $product = Item::create($productData);
             foreach ($request->itemID as $key => $value) {
                 $item = Item::findOrFail($value);
                 $detailData = [
-                    'ProductID' => $product->ProductID,
+                    'ProductID' => $product->ItemID,
                     'ItemID' => $item->ItemID,
                     'ItemName' => $item->ItemName,
                     'quantity' => $request->itemQty[$key],
@@ -198,7 +204,7 @@ class ProductController extends Controller
         try {
             $pagetitle = 'Product Update';
             $items = Item::where('ItemType', 'RawMaterial')->get();
-            $product = Product::with('productDetails.Item')->findOrFail($id);
+            $product = Item::with('productDetails.Item')->findOrFail($id);
             // dd($product);
             return view('production.productEdit', compact('pagetitle', 'items', 'product'));
         } catch (\Exception $e) {
@@ -233,7 +239,12 @@ class ProductController extends Controller
             // dd($request->all());
             DB::beginTransaction();
             ProductDetail::where('ProductID', $request->id)->delete();
-            Product::findOrFail($request->id)->update($request->except('_token', 'itemID', 'itemQty', 'id'));
+            $productData = [
+                'ItemName' => $request->name,
+                'SellingPrice' => $request->price,
+                'description' => $request->details,
+            ];
+            Item::findOrFail($request->id)->update($productData);
             foreach ($request->itemID as $key => $value) {
                 $item = Item::findOrFail($value);
                 $detailData = [
@@ -249,6 +260,7 @@ class ProductController extends Controller
             return redirect('Products')->with('error', 'Product Addedd Successfully')->with('class', 'success');
         } catch (\Exception $e) {
             DB::rollBack();
+            dd($e->getMessage());
             return redirect()->back()->with('error', $e->getMessage())->with('class', 'danger')->withInput();
 
             //throw $th;
@@ -258,7 +270,7 @@ class ProductController extends Controller
     {
         try {
             $pagetitle = 'Product Details';
-            $product = Product::with('productDetails')->findOrFail($id);
+            $product = Item::with('productDetails')->findOrFail($id);
             // dd($product);
             return view('production.productShow', compact('pagetitle', 'product'));
         } catch (\Exception $e) {
@@ -271,7 +283,7 @@ class ProductController extends Controller
         // dd($id);
         try {
             DB::beginTransaction();
-            $product = Product::with('productDetails')->findOrFail($id);
+            $product = Item::with('productDetails')->findOrFail($id);
             $product->productDetails()->delete();
 
             // Delete the main model
@@ -289,9 +301,9 @@ class ProductController extends Controller
     {
         // dd($request->all());
         try {
-            $data = Product::findOrFail($request->id);
+            $data = Item::with('productDetails')->findOrFail($request->id);
             // dd($data);
-            return response()->json(['data' => $data]);
+            return response()->json(['data' => $data, 'items' => $data->productDetails]);
         } catch (\Exception $e) {
             return response()->json(['errors' => $e->getMessage()]);
         }

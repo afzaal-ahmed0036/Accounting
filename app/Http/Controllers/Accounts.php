@@ -33,7 +33,6 @@ use App\Exports\PartyBalanceExcel;
 
 use App\Exports\SalemanExport;
 use App\Exports\PartyLedgerExcel;
-use App\Models\Product;
 
 class Accounts extends Controller
 {
@@ -5655,7 +5654,6 @@ class Accounts extends Controller
         Session::put('menu', 'SalesInvoice');
         $invoice_type = DB::table('invoice_type')->get();
         $items = DB::table('item')->where('ItemType', '!=', 'RawMaterial')->orWhereNull('ItemType')->get();
-        $products = Product::all();
         $item = json_encode($items);
         // dd($item);
         $party = DB::table('party')->get();
@@ -5747,10 +5745,6 @@ class Accounts extends Controller
                 'DiscountType' => $request->DiscountType[$i],
                 'Gross' => $request->Gross[$i],
                 'DiscountAmountItem' => $request->DiscountAmountItem[$i],
-
-
-
-
             );
 
             $id = DB::table('invoice_detail')->insertGetId($invoice_det);

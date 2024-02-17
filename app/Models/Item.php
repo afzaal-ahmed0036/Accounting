@@ -12,4 +12,8 @@ class Item extends Model
     protected $primaryKey = 'ItemID';
 
     protected $guarded = [];
+    public function productDetails()
+    {
+        return $this->hasMany(ProductDetail::class, 'ProductID');
+    }
 }

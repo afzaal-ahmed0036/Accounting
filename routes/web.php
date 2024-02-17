@@ -36,7 +36,7 @@ Route::post('/base2/', [KM::class, 'base2']);
 
 
 
-Route::get('/', [Accounts::class, 'Lo;gin']);
+Route::get('/', [Accounts::class, 'Login']);
 Route::get('/Login', [Accounts::class, 'Login']);
 Route::post('/UserVerify', [Accounts::class, 'UserVerify']);
 
@@ -561,11 +561,11 @@ Route::group(['middleware' => ['CheckAdmin']], function () {
 
 
     // ware house
-    Route::get('/wareHouseList', [Warehouse::class, 'wareHouseList']);
-    Route::post('/storeWareHouse', [Warehouse::class, 'storeWareHouse']);
-    Route::post('/getWarehouseDetail', [Warehouse::class, 'getWarehouseDetail']);
-    Route::post('/updateWareHouse', [Warehouse::class, 'updateWareHouse']);
-    Route::get('/deleteWareHouse/{id}', [Warehouse::class, 'deleteWareHouse']);
+    // Route::get('/wareHouseList', [Warehouse::class, 'wareHouseList']);
+    // Route::post('/storeWareHouse', [Warehouse::class, 'storeWareHouse']);
+    // Route::post('/getWarehouseDetail', [Warehouse::class, 'getWarehouseDetail']);
+    // Route::post('/updateWareHouse', [Warehouse::class, 'updateWareHouse']);
+    // Route::get('/deleteWareHouse/{id}', [Warehouse::class, 'deleteWareHouse']);
 
 
     Route::get('/DBDump/', [Accounts::class, 'DBDump']);
@@ -615,12 +615,20 @@ Route::group(['middleware' => ['CheckAdmin']], function () {
 
 
     Route::get('Production/Logs', [ProductionController::class, 'productionLogs']);
-    Route::get('Production/Log/Create', [ProductionController::class, 'productionLogCreate']);
-    Route::post('Production/Log/Save', [ProductionController::class, 'productionLogSave']);
-    Route::get('ProductionLog/Edit/{id}', [ProductionController::class, 'productionLogEdit']);
-    Route::post('ProductionLog/Update', [ProductionController::class, 'productionLogUpdate']);
+    // Route::get('Production/Log/Create', [ProductionController::class, 'productionLogCreate']);
+    // Route::post('Production/Log/Save', [ProductionController::class, 'productionLogSave']);
+    // Route::get('ProductionLog/Edit/{id}', [ProductionController::class, 'productionLogEdit']);
+    // Route::post('ProductionLog/Update', [ProductionController::class, 'productionLogUpdate']);
     Route::get('ProductionLog/Delete/{id}', [ProductionController::class, 'productionLogDelete']);
     Route::get('ProductionLog/View/{id}', [ProductionController::class, 'productionLogView']);
+
+    Route::get('getMaterialStock/{id}', [ProductionController::class, 'getMaterialStock']);
+
+    Route::get('Production/Log/Create', [ProductionController::class, 'productionLogCreateNew']);
+    Route::post('Production/Log/Save', [ProductionController::class, 'productionLogSaveNew']);
+    Route::get('ProductionLog/Edit/{id}', [ProductionController::class, 'productionLogEditNew']);
+    Route::post('ProductionLog/Update', [ProductionController::class, 'productionLogUpdateNew']);
+
 
 
 
